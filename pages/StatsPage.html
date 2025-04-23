@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stats Fortnite</title>
+  <link rel="stylesheet" href="../css/statspage.style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="Homepage.html" class="nav-link">Accueil</a></li>
+        <li><a href="StatsPage.html" class="nav-link">Stats</a></li>
+        <li><a href="#about" class="nav-link">À propos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="stats-container">
+      <h1>Stats Fortnite Joueur</h1>
+      <input type="text" id="username" placeholder="Ex: Flc panzer" />
+      <br></br>
+      <button onclick="getStats()">Voir les stats</button>
+
+      <div id="result" class="result" style="margin-top: 20px;"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 VictoryPulse. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    const API_KEY = "af4b2c8f-1c65-43a5-920c-129725471ce2";
+
+    async function getStats() {
+      const username = document.getElementById("username").value.trim();
+      const output = document.getElementById("result");
+      output.innerHTML = "🔄 Chargement...";
+
+      if (!username) {
+        output.innerHTML = "⚠️ Entrez un pseudo valide.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://fortnite-api.com/v2/stats/br/v2?name=${encodeURIComponent(username)}`, {
+          headers: { Authorization: API_KEY }
+        });
+
+        if (!res.ok) throw new Error("❌ Joueur non trouvé ou erreur API.");
+
+        const data = await res.json();
+        const stats = data.data.stats.all.overall;
+
+        output.innerHTML = `
+          <h2>Stats de <span style="color:#4caf50">${username}</span></h2>
+          <p><strong>🎮 Matches joués:</strong> ${stats.matches}</p>
+          <p><strong>🏆 Victoires:</strong> ${stats.wins}</p>
+          <p><strong>🔫 Kills:</strong> ${stats.kills}</p>
+          <p><strong>⚔️ K/D:</strong> ${stats.kd}</p>
+          <p><strong>📊 Winrate:</strong> ${stats.winRate}%</p>
+        `;
+      } catch (err) {
+        console.error(err);
+        output.innerHTML = err.message;
+      }
+    }
+  </script>
+</body>
+</html>
