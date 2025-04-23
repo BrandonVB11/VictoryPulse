@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique VictoryPulse</title>
+  <link rel="stylesheet" href="../css/shoppage.style.css"> <!-- Lien vers ton fichier CSS externe -->
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="Homepage.html" class="nav-link">Accueil</a></li>
+        <li><a href="StatsPage.html" class="nav-link">Stats</a></li>
+        <li><a href="ShopPage.html" class="nav-link active">Boutique</a></li>
+        <li><a href="#about" class="nav-link">À propos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="shop-container">
+      <br></br>
+      <br></br>
+      <h1>Bienvenue dans la Boutique VictoryPulse</h1>
+      <p>Explore les meilleurs articles Fortnite disponibles pour toi!</p>
+      <br></br>
+      <div id="shop-items" class="shop-items">
+        <!-- Les articles seront insérés ici via JavaScript -->
+      </div>
+
+      <!-- Animation de chargement -->
+      <div id="loading" class="loading" style="display:none;">
+        <p>🔄 Chargement...</p>
+        <div class="loading-spinner"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 VictoryPulse. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    async function fetchShopItems() {
+      const shopItemsContainer = document.getElementById('shop-items');
+      const loadingSpinner = document.getElementById('loading');
+
+      loadingSpinner.style.display = 'block';
+      shopItemsContainer.innerHTML = '';
+
+      try {
+        const response = await fetch('https://fortnite-api.com/v2/shop');
+        if (!response.ok) throw new Error(`Erreur : ${response.status}`);
+
+        const data = await response.json();
+        const entries = data.data?.entries || [];
+
+        if (!entries.length) {
+          shopItemsContainer.innerHTML = "<p>Aucun article disponible actuellement.</p>";
+          return;
+        }
+
+        entries.forEach(entry => {
+          (entry.brItems || []).forEach(item => {
+            shopItemsContainer.innerHTML += `
+              <div class="shop-item">
+                <img src="${item.images.icon}" alt="${item.name}">
+                <h2>${item.name}</h2>
+                <p>${item.description}</p>
+                <p>Prix: ${entry.finalPrice} V-bucks</p>
+                <button class="add-to-cart-btn">Ajouter au panier</button>
+              </div>`;
+          });
+        });
+      } catch (error) {
+        shopItemsContainer.innerHTML = `<p class="error-message">❌ ${error.message}</p>`;
+      } finally {
+        loadingSpinner.style.display = 'none';
+      }
+    }
+
+    // Appelle la fonction pour récupérer les articles dès que la page est chargée
+    fetchShopItems();
+  </script>  
+</body>
+</html>

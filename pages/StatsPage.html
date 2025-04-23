@@ -13,6 +13,7 @@
       <ul>
         <li><a href="Homepage.html" class="nav-link">Accueil</a></li>
         <li><a href="StatsPage.html" class="nav-link">Stats</a></li>
+        <li><a href="ShopPage.html" class="nav-link active">Boutique</a></li>
         <li><a href="#about" class="nav-link">À propos</a></li>
       </ul>
     </nav>
@@ -57,7 +58,7 @@
         const stats = data.data.stats.all.overall;
 
         output.innerHTML = `
-          <h2>Stats de <span style="color:#4caf50">${username}</span></h2>
+          <h2>Stats de <span style="color:#29C6EE">${username}</span></h2>
           <p><strong>🎮 Matches joués:</strong> ${stats.matches}</p>
           <p><strong>🏆 Victoires:</strong> ${stats.wins}</p>
           <p><strong>🔫 Kills:</strong> ${stats.kills}</p>
