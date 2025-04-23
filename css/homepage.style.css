@@ -5,13 +5,13 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Fond noir */
+    background-color: #00060C; /* Fond noir */
     color: #fff;
   }
   
   /* Navbar */
   header {
-    background-color: #000;
+    background-color: #00060C;
     padding: 20px 0;
     position: fixed;
     width: 100%;
@@ -52,7 +52,7 @@ body {
   }
   
   .logo {
-    width: 150px;
+    width: 300px;
     height: auto;
   }
   
@@ -64,7 +64,7 @@ body {
   
   p {
     font-size: 20px;
-    color: #bbb;
+    color: #29C6EE;
   }
   
   /* Section principale */
@@ -74,7 +74,7 @@ body {
   }
   
   .intro {
-    background-color: #1c1c1c;
+    background-color: #00060C;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -82,13 +82,13 @@ body {
   
   .intro h2 {
     font-size: 32px;
-    color: #fff;
+    color: #29C6EE;
     margin-bottom: 20px;
   }
   
   .intro p {
     font-size: 20px;
-    color: #ddd;
+    color: #29C6EE;
     margin-bottom: 30px;
   }
   
@@ -96,7 +96,7 @@ body {
     display: inline-block;
     padding: 15px 30px;
     background-color: #29C6EE;
-    color: #fff;
+    color: #29C6EE;
     font-size: 18px;
     border: none;
     border-radius: 5px;
@@ -111,8 +111,8 @@ body {
   
   /* Footer */
   footer {
-    background-color: #000;
-    color: #bbb;
+    background-color: #00060C;
+    color: #29C6EE;
     padding: 20px;
     text-align: center;
     position: fixed;
@@ -122,5 +122,6 @@ body {
   
   footer p {
     font-size: 16px;
+    color: #29C6EE;
   }
   
